@@ -2,14 +2,14 @@ const express = require ('express');
 
 const router = express.Router();
 
-const Post = reqire('../model/Post');
+const Post = require('../model/Posts');
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.send('you are on post');
 });
 
 router.post('/', (req, res) => {
-  console.log('request.body');
+  console.log(request.body);
 });
 
-module.exports = routers;
+module.exports = router;
