@@ -8,8 +8,17 @@ router.get('/', (req, res) => {
   res.send('you are on post');
 });
 
-router.post('/', (req, res) => {
-  console.log(request.body);
+router.post('/', async (req, res) => {
+  const post = new Post({
+    title: req.body.title,
+    description: req.body.description
+  });
+  try {
+    const savedPost = await post.save();
+    res.json(savedPost);
+  } catch (err) {
+    res.json({ message : err });
+  }
 });
 
 module.exports = router;

@@ -5,6 +5,11 @@ const bodyParser = require('body-parser');
 require('dotenv/config');
 
 
+
+// Starting body parser
+
+app.use(bodyParser.json());
+
 // Start listening
 
 app.listen(3000, () => {
@@ -12,7 +17,6 @@ app.listen(3000, () => {
 })
 
 // Establishing mongoDB connection
-
 
 mongoose.connect(process.env.DB_CONNECTION, () => {
    console.log('Connected to Mongo DB');
@@ -23,6 +27,8 @@ mongoose.connect(process.env.DB_CONNECTION, () => {
 const postsRoutes = require ('./routes/posts');
 app.use('/posts', postsRoutes);
 
-// Starting body parser
+// Routes
 
-app.use(bodyParser.json());
+app.get ('/', (req, res) => {
+   res.send('We are in Home');
+});
