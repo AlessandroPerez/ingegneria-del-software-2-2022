@@ -4,8 +4,13 @@ const router = express.Router();
 
 const Post = require('../model/Posts');
 
-router.get('/', (req, res) => {
-  res.send('you are on post');
+router.get('/', async (req, res) => {
+  try{
+    const posts = await Post.find();
+    res.json(posts);
+  } catch (err) {
+    res.json({message:err})
+  }
 });
 
 router.post('/', async (req, res) => {
@@ -13,7 +18,7 @@ router.post('/', async (req, res) => {
     title: req.body.title,
     description: req.body.description
   });
-  try {
+   try {
     const savedPost = await post.save();
     res.json(savedPost);
   } catch (err) {
