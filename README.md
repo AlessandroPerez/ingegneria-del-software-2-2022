@@ -1,5 +1,7 @@
-# ingegneria-del-software-2-2022
+# Login_Express_App
+This is the project demonstrate login express app created with node and express.
 
-https://docs.google.com/spreadsheets/d/11u_DhXQGn1Gd7SKoFgEUlVYxZIOCa48T1QZ36RgCx4M/edit#gid=2140256948
+### To run this project clone it and open up the terminal. and type a command,
+``` npm install ```
 
-https://docs.google.com/spreadsheets/d/1vbXQQnv6DBWDA3S-jbGIcikTsy4XTv8VRhtxFayY_m0/edit#gid=1999118864
+This command will install all the dependancy in the project.

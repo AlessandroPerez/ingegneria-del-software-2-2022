@@ -1,0 +1,25 @@
+<%- include('header') -%>
+
+<div class="text-center center-div mt-5" id="login"> 
+
+    <h3>BENVENUTI in..ugg</h3>
+    <div class="container w-25 border py-5 mt-5">
+        
+        <h3>BENVENUTI in.. ZUGRI RENT</h3>
+        <table  style="width:500px;text-align:center;" >
+        <form action="/route/vetrina" method="get" id="form1" ></form>    
+            <tr><td>Visuliazza vetrina</td><td><button type="submit" class="btn btn-success rounded-pill" form="form1" >vetrina</button></td></tr>
+        </form>
+        <form action="/route/carrello" method="get" id="form2" ></form>
+            <tr><td>Visualizza carrello</td><td><button type="submit" class="btn btn-success rounded-pill" form="form2">carrelllo</button></td></tr>
+        </form>
+            <tr><td>percorsi consigliati</td><td><button type="submit" class="btn btn-success rounded-pill">percorsi</button></td></tr>
+        </table>
+        
+        <h5><%= locals.user ? user : "User" %></h5>
+        <a href="/route/logout">Logout</a>
+    </form>
+    </div>
+</div>
+
+<%- include('footer') -%>
