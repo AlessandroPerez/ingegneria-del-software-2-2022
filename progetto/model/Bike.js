@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const EBike = mongoose.Schema({
+const Bike = mongoose.Schema({
      description: { 
           type: String,
           required: true },
@@ -15,4 +15,4 @@ const EBike = mongoose.Schema({
           required: true }
 })
 
-module.exports = mongoose.model('Ebike', EbikeSchema);
+module.exports = mongoose.model('Bike', BikeSchema);
