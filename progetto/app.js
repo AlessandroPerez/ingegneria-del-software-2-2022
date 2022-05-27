@@ -27,6 +27,9 @@ mongoose.connect(process.env.DB_CONNECTION, () => {
 const postsRoutes = require ('./routes/posts');
 app.use('/posts', postsRoutes);
 
+const bikesRoutes = require ('./routes/bikes');
+app.use('/bikes', bikesRoutes);
+
 // Routes
 
 app.get ('/', (req, res) => {

@@ -29,7 +29,7 @@ router.get('/:bikeId', async (req, res) =>{
 
 // Submit a post
 
-router.bike('/', async (req, res) => {
+router.post('/', async (req, res) => {
   const bike = new Bike({
     model: req.body.model,
     description: req.body.description,

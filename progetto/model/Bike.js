@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Bike = mongoose.Schema({
+const BikeSchema = mongoose.Schema({
      description: { 
           type: String,
           required: true },
