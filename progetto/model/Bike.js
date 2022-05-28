@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const BikeSchema = mongoose.Schema({
+     model: {
+          type: String,
+          required:true},
      description: { 
           type: String,
           required: true },
@@ -12,7 +15,11 @@ const BikeSchema = mongoose.Schema({
           required: true },
      tot_review: { 
           type: Number, 
-          required: true }
+          required: true },
+     review: {
+          type: Number,
+          required: true
+          }
 })
 
 module.exports = mongoose.model('Bike', BikeSchema);

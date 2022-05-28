@@ -35,10 +35,11 @@ router.post('/', async (req, res) => {
     description: req.body.description,
     price: req.body.price,
     sum_review: req.body.sum_review,
-    tot_review: req.body.tot_review
+    tot_review: req.body.tot_review,
+    review: req.body.review
   });
   try {
-    const savedBike = await Bike.save();
+    const savedBike = await bike.save();
     res.json(savedBike);
   } catch (err) {
     res.json({ message : err });
