@@ -2,41 +2,38 @@ const express = require ('express');
 
 const router = express.Router();
 
-const Bike = require('../model/Bike');
+const {Bike, ReviewModel} = require('../model/Bike');
 
 
-// Gets back all the posts
+// Gets back all the bikes
 
 router.get('/', async (req, res) => {
   try{
     const bikes = await Bike.find();
-    res.json(bikes);
+    res.json(bike.toJSON({virtuals: true}));
   } catch (err) {
     res.json({message:err})
   }
 });
 
-// Get back a single post
+// Get back a single bike
 
 router.get('/:bikeId', async (req, res) =>{
   try {
     const bike = await Bike.findById(req.params.bikeId);
-    res.json(bike);
+    res.json(bike.toJSON({virtuals: true}));
   } catch (err) {
     res.json({ message : err });
   }
 });
 
-// Submit a post
+// Submit a bike
 
 router.post('/', async (req, res) => {
   const bike = new Bike({
     model: req.body.model,
     description: req.body.description,
     price: req.body.price,
-    sum_review: req.body.sum_review,
-    tot_review: req.body.tot_review,
-    review: req.body.review
   });
   try {
     const savedBike = await bike.save();
@@ -46,7 +43,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Delete a specific post
+// Delete a specific bike
 
 router.delete('/:bikeId', async (req, res) => {
   try {
@@ -57,8 +54,8 @@ router.delete('/:bikeId', async (req, res) => {
   }
 });
 
-// Update a specific post
-
+// Update a specific bike
+/*
 router.patch('/:bikeId', async (req, res) => {
   try {
     const updatedBike = await Bike.updateOne({_id:req.params.bikeId},
@@ -67,18 +64,26 @@ router.patch('/:bikeId', async (req, res) => {
   } catch (err) {
     res.json({ message : err });
   }
-})
-
+});
 // Make a reviw
 
-router.patch('/:bikeId', async (req, res) => {
+*/
+router.post('/:bikeId/review', async (req, res) => {
   try {
-    const updatedReviw = await Bike.updateOne({_id:req.params.bikeId},
-                                             {$set: {tot_review : req.body.tot_review += 1}})
-          res.json(updatedBike);
+    const review = new ReviewModel({
+      vote: req.body.vote,
+    })
+    const bike = await Bike.findById(req.params.bikeId);
+    try {
+      bike.reviews.push(review.toJSON());
+      const savedBike = await bike.save();
+      res.json(savedBike);
+    } catch (err) {
+      res.json({message: err});
+    }
   } catch (err) {
-    res.json({ message : err });
+    res.json ({message: err});
   }
-})
+});
 
 module.exports = router;
