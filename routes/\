@@ -1,0 +1,91 @@
+const express = require ('express');
+
+const router = express.Router();
+
+const Bike = require('../model/Bike');
+
+
+// Gets back all the bikes
+
+router.get('/', async (req, res) => {
+  try{
+    const bikes = await Bike.find();
+    res.json(bikes);
+  } catch (err) {
+    res.json({message:err})
+  }
+});
+
+// Get back a single bike
+
+router.get('/:bikeId', async (req, res) =>{
+  try {
+    const bike = await Bike.findById(req.params.bikeId);
+    res.json(bike);
+  } catch (err) {
+    res.json({ message : err });
+  }
+});
+
+// Submit a bike
+
+router.post('/', async (req, res) => {
+  const bike = new Bike({
+    model: req.body.model,
+    description: req.body.description,
+    price: req.body.price,
+    sum_review: req.body.sum_review,
+    tot_review: req.body.tot_review,
+    review: req.body.review
+  });
+  try {
+    const savedBike = await bike.save();
+    res.json(savedBike);
+  } catch (err) {
+    res.json({ message : err });
+  }
+});
+
+// Delete a specific bike
+
+router.delete('/:bikeId', async (req, res) => {
+  try {
+    const removedBike = await Bike.remove({_id:req.params.bikeId});
+    res.json(removedBike);
+  } catch (err) {
+    res.json({ message : err });
+  }
+});
+
+// Update a specific bike
+/*
+router.patch('/:bikeId', async (req, res) => {
+  try {
+    const updatedBike = await Bike.updateOne({_id:req.params.bikeId},
+                                             {$set: {title : req.body.title}});
+    res.json(updatedBike);
+  } catch (err) {
+    res.json({ message : err });
+  }
+});
+*/
+// Make a reviw
+
+router.patch('/:bikeId', async (req, res) => {
+  Bike.updateOne({_id:req.params.bikeId}, {$inc: {tot_review: 1}})
+      .then (data => {
+        res.json(data);
+      })
+      .catch (err => {
+        res.json(message: err);
+      })
+  Bike.updateOne ({_id:req.param.bieId}, {$inc: {sum_review: req.body.sum_review}})
+      .than (data => {
+        res.json(data);
+      })
+      .catch (err => {
+        res.json(message: err);
+      })
+});
+
+module.exports = router;
