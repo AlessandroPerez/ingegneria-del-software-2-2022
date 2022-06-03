@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // Start listening
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
    console.log('Server listening on %s port', process.env.PORT);
 })
 
