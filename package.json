@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reporter=lcov --reporter=text mocha ./test/bikes.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,11 @@
     "express": "^4.18.1",
     "mongoose": "^6.3.4",
     "nodemon": "^2.0.16"
+  },
+  "devDependencies": {
+    "mocha": "latest",
+    "nyc": "latest",
+    "supertest": "latest",
+    "chai": "latest"
   }
 }

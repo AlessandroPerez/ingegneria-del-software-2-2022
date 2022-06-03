@@ -11,17 +11,20 @@ const mongoose = require('mongoose');
 // Gets back all the bikes
 
 router.get('/', async (req, res) => {
-  try{
-    const bikes = await Bike.find();
-    res.json(bikes.map(bike => {
-      return bike.toJSON({virtuals: true});
-    }));
-  } catch (err) {
-    console.log(err.message);
-    res.json({message:err})
-  }
+  res.json(handleGetBike());
 });
 
+async function handleGetBike(){
+   try{
+    const bikes = await Bike.find();
+    return bikes.map(bike => {
+      return bike.toJSON({virtuals: true});
+    });
+  } catch (err) {
+    console.log(err.message);
+    return {message:err};
+  }
+}
 // Get back a single bike
 
 router.get('/:bikeId', async (req, res) =>{
@@ -111,4 +114,6 @@ router.post('/:bikeId/reservation', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = {
+  handleGetBike,
+}

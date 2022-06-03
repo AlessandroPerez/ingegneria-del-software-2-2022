@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 require('dotenv/config');
 
 
-
 // Starting body parser
 
 app.use(bodyParser.json());
@@ -35,3 +34,7 @@ app.use('/bikes', bikesRoutes);
 app.get ('/', (req, res) => {
    res.send('We are in Home');
 });
+
+// Exporting app
+
+module.exports = app;
