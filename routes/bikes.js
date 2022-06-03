@@ -8,23 +8,14 @@ const Reservations = require('../model/Reservations');
 
 const mongoose = require('mongoose');
 
+const {BikeController} = require('../controller/bikes');
+
 // Gets back all the bikes
 
 router.get('/', async (req, res) => {
-  res.json(handleGetBike());
+  res.json(await BikeController());
 });
 
-async function handleGetBike(){
-   try{
-    const bikes = await Bike.find();
-    return bikes.map(bike => {
-      return bike.toJSON({virtuals: true});
-    });
-  } catch (err) {
-    console.log(err.message);
-    return {message:err};
-  }
-}
 // Get back a single bike
 
 router.get('/:bikeId', async (req, res) =>{
@@ -114,6 +105,4 @@ router.post('/:bikeId/reservation', async (req, res) => {
   }
 });
 
-module.exports = {
-  handleGetBike,
-}
+module.exports = router;

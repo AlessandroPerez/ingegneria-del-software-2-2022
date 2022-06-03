@@ -4,7 +4,7 @@ const request = require('supertest');
 
 const {expect} = require('chai');
 
-const {handleGetBike} = require('../routes/bikes');
+const {BikeController} = require('../controller/bikes');
 
 describe ('bike routes', () => {
   it('should return an appliction/json', (done) => {
@@ -21,11 +21,10 @@ describe ('bike routes', () => {
       })
       .catch(err => done(err))
   })
-  it('tests a single method', (done) => {
-    const bike = handleGetBike();
+  it('tests a single method',async () => {
+    const bike = await BikeController();
         expect(bike[0].model).to.be.a('string');
         expect(bike[0].description).to.be.a('string');
         expect(bike[0].price).to.be.a('number');
-          done();
   });
 })
