@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 
 // Start listening
 
-app.listen(3000, () => {
-   console.log('Server listening on 3000');
+app.listen(process.env.PORT, () => {
+   console.log('Server listening on %s port', process.env.PORT);
 })
 
 // Establishing mongoDB connection
