@@ -13,8 +13,11 @@ const mongoose = require('mongoose');
 router.get('/', async (req, res) => {
   try{
     const bikes = await Bike.find();
-    res.json(bike.toJSON({virtuals: true}));
+    res.json(bikes.map(bike => {
+      return bike.toJSON({virtuals: true});
+    }));
   } catch (err) {
+    console.log(err.message);
     res.json({message:err})
   }
 });
