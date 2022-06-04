@@ -16,9 +16,9 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+ # build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+  #  runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     # steps:
@@ -34,28 +34,28 @@ jobs:
         # run: |
           # echo Add other actions to build,
           # echo test, and deploy your project.
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x]
+  #  strategy:
+    #  matrix:
+      #  node-version: [14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm test
-      env:
-          CI: true
-    - uses: VeryGoodOpenSource/very_good_coverage@v1
-      with:
-        path: './coverage/lcov.info'
-        min_coverage: 30
-    
+#    steps:
+  #  - uses: actions/checkout@v2
+   # - name: Use Node.js ${{ matrix.node-version }}
+     # uses: actions/setup-node@v2
+     # with:
+     #   node-version: ${{ matrix.node-version }}
+  #  - run: npm ci
+  # - run: npm test
+  #    env:
+   #       CI: true
+ #   - uses: VeryGoodOpenSource/very_good_coverage@v1
+ #     with:
+ #       path: './coverage/lcov.info'
+   #     min_coverage: 80
+  #  
   deploy: ## push to heroku
-      needs: build
+     # needs: build
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
